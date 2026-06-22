@@ -7,9 +7,9 @@ The project will grow in small milestones to demonstrate real-world application 
 ## Tech Stack
 
 - Frontend: Next.js, TypeScript, Tailwind CSS
-- Backend: FastAPI, SQLAlchemy async, Pydantic
-- Database: PostgreSQL
-- Local development: Docker Compose
+- Backend: FastAPI
+- Database: PostgreSQL, planned
+- Local development: Docker Compose, planned
 - Testing: pytest for backend tests
 - CI/CD: GitHub Actions planned
 
@@ -26,21 +26,42 @@ infra/
 
 ## Local Development Status
 
-Local application services are not available yet. Milestone 1A only establishes project documentation and configuration placeholders.
+Milestone 1B adds a minimal FastAPI backend with a `/health` endpoint and one pytest test. Database, Docker, authentication, and frontend commands are still planned.
 
 ## Current Milestone
 
-Current milestone: M1A - Documentation and configuration baseline.
+Current milestone: M1B - FastAPI health check and backend test setup.
+
+## Backend Local Development
+
+Available now:
+
+```bash
+cd apps/api
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+uvicorn app.main:app --reload
+```
+
+In another terminal, verify the health check:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+Run backend tests:
+
+```bash
+cd apps/api
+pytest
+```
 
 ## Planned Commands
 
 These commands are planned for future milestones and are not available yet:
 
 ```bash
-# Planned for M1B: backend health check and tests
-cd apps/api
-pytest
-
 # Planned for M1C: frontend development server
 cd apps/web
 npm run dev
