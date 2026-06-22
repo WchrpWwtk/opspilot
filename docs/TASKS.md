@@ -23,4 +23,18 @@ Status: Complete.
 - [x] Add `GET /health` returning `{"status": "ok"}`
 - [x] Add one pytest test for `/health`
 - [x] Update `README.md` with available backend run and test commands
-- [ ] Approve moving to M1C
+- [x] Approve moving to M1C
+
+## M1C: Frontend Shell
+
+Status: Complete.
+
+- [x] Create minimal Next.js frontend package in `apps/web/package.json`
+- [x] Add `dev`, `build`, `start`, and `typecheck` scripts
+- [x] Add App Router files in `apps/web/app`
+- [x] Render the OpsPilot AI landing shell
+- [x] Show current milestone as `M1C Frontend Shell`
+- [x] Show backend health check URL placeholder without calling the backend
+- [x] Use plain CSS in `apps/web/app/globals.css`
+- [x] Update `README.md` with separate backend and frontend commands
+- [ ] Approve moving to M1D

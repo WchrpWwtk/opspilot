@@ -6,7 +6,7 @@ The project will grow in small milestones to demonstrate real-world application 
 
 ## Tech Stack
 
-- Frontend: Next.js, TypeScript, Tailwind CSS
+- Frontend: Next.js, TypeScript, plain CSS for the current shell
 - Backend: FastAPI
 - Database: PostgreSQL, planned
 - Local development: Docker Compose, planned
@@ -17,8 +17,8 @@ The project will grow in small milestones to demonstrate real-world application 
 
 ```text
 apps/
-  api/        FastAPI backend, planned
-  web/        Next.js frontend, planned
+  api/        FastAPI backend
+  web/        Next.js frontend
 docs/         Product, roadmap, decisions, and task notes
 infra/
   docker/     Local infrastructure configuration, planned
@@ -26,15 +26,15 @@ infra/
 
 ## Local Development Status
 
-Milestone 1B adds a minimal FastAPI backend with a `/health` endpoint and one pytest test. Database, Docker, authentication, and frontend commands are still planned.
+Milestone 1C adds a minimal Next.js frontend shell. The backend has a `/health` endpoint and one pytest test. Database, Docker, authentication, and frontend API integration are still planned.
 
 ## Current Milestone
 
-Current milestone: M1B - FastAPI health check and backend test setup.
+Current milestone: M1C - Frontend Shell.
 
 ## Backend Local Development
 
-Available now:
+Start the FastAPI backend:
 
 ```bash
 cd apps/api
@@ -57,15 +57,36 @@ cd apps/api
 pytest
 ```
 
+## Frontend Local Development
+
+Install frontend dependencies:
+
+```bash
+cd apps/web
+pnpm install
+```
+
+Start the Next.js development server:
+
+```bash
+cd apps/web
+pnpm dev
+```
+
+Run the frontend type check:
+
+```bash
+cd apps/web
+pnpm typecheck
+```
+
+The frontend currently displays the backend health check URL as a placeholder and does not call the backend yet.
+
 ## Planned Commands
 
 These commands are planned for future milestones and are not available yet:
 
 ```bash
-# Planned for M1C: frontend development server
-cd apps/web
-npm run dev
-
 # Planned for M1D: Docker Compose local baseline
 docker compose -f infra/docker/docker-compose.yml up
 ```
