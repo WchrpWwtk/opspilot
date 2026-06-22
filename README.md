@@ -8,8 +8,8 @@ The project will grow in small milestones to demonstrate real-world application 
 
 - Frontend: Next.js, TypeScript, plain CSS for the current shell
 - Backend: FastAPI
-- Database: PostgreSQL, planned
-- Local development: Docker Compose, planned
+- Database: PostgreSQL local service, application persistence planned
+- Local development: Docker Compose
 - Testing: pytest for backend tests
 - CI/CD: GitHub Actions planned
 
@@ -20,17 +20,49 @@ apps/
   api/        FastAPI backend
   web/        Next.js frontend
 docs/         Product, roadmap, decisions, and task notes
-infra/
-  docker/     Local infrastructure configuration, planned
+compose.yml   Docker Compose local development baseline
+infra/        Deployment and infrastructure configuration, planned
 ```
 
 ## Local Development Status
 
-Milestone 1C adds a minimal Next.js frontend shell. The backend has a `/health` endpoint and one pytest test. Database, Docker, authentication, and frontend API integration are still planned.
+Milestone 1D adds a minimal Docker Compose local development baseline. The backend has a `/health` endpoint and one pytest test. Database application code, authentication, and frontend API integration are still planned.
 
 ## Current Milestone
 
-Current milestone: M1C - Frontend Shell.
+Current milestone: M1D - Docker Compose Local Development Baseline.
+
+## Docker Compose Local Development
+
+Copy the non-secret local development environment template:
+
+```bash
+cp .env.example .env
+```
+
+Start Postgres, the FastAPI backend, and the Next.js frontend:
+
+```bash
+docker compose up --build
+```
+
+In another terminal, verify the backend health check:
+
+```bash
+curl http://127.0.0.1:8000/health
+```
+
+Open the frontend:
+
+```bash
+http://localhost:3000
+```
+
+Stop the local stack:
+
+```bash
+docker compose down
+```
 
 ## Backend Local Development
 
@@ -81,12 +113,3 @@ pnpm typecheck
 ```
 
 The frontend currently displays the backend health check URL as a placeholder and does not call the backend yet.
-
-## Planned Commands
-
-These commands are planned for future milestones and are not available yet:
-
-```bash
-# Planned for M1D: Docker Compose local baseline
-docker compose -f infra/docker/docker-compose.yml up
-```

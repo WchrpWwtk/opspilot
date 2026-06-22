@@ -9,3 +9,7 @@
 - Use Docker Compose for local development infrastructure.
 - Use pytest for backend testing.
 - Work in small milestone-based steps so each change remains reviewable.
+
+## Docker Compose Local Development
+
+- Keep `compose.yml` at the repository root so local development can start with `docker compose up --build` from the project root.

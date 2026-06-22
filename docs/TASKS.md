@@ -37,4 +37,22 @@ Status: Complete.
 - [x] Show backend health check URL placeholder without calling the backend
 - [x] Use plain CSS in `apps/web/app/globals.css`
 - [x] Update `README.md` with separate backend and frontend commands
-- [ ] Approve moving to M1D
+- [x] Approve moving to M1D
+
+## M1D: Docker Compose Local Development Baseline
+
+Status: Complete.
+
+- [x] Add root-level `compose.yml`
+- [x] Add `postgres`, `api`, and `web` services
+- [x] Use PostgreSQL 18 for the local database service
+- [x] Build the API service from `apps/api`
+- [x] Build the web service from `apps/web`
+- [x] Expose local ports 5432, 8000, and 3000
+- [x] Add a named volume for Postgres data
+- [x] Add development Dockerfiles for API and web
+- [x] Add API and web `.dockerignore` files
+- [x] Update `.env.example` for Docker Compose local defaults
+- [x] Update `README.md` with Docker Compose commands
+- [x] Record root-level Compose decision in `docs/DECISIONS.md`
+- [ ] Approve moving to M2
