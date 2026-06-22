@@ -1,1 +1,32 @@
-/.idea/*
+# dependencies
+node_modules/
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# env
+.env
+.env.*
+!.env.example
+
+# build
+.next/
+dist/
+build/
+coverage/
+htmlcov/
+
+# db / local
+*.sqlite3
+*.db
+pgdata/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
