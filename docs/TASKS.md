@@ -55,4 +55,20 @@ Status: Complete.
 - [x] Update `.env.example` for Docker Compose local defaults
 - [x] Update `README.md` with Docker Compose commands
 - [x] Record root-level Compose decision in `docs/DECISIONS.md`
-- [ ] Approve moving to M2
+- [x] Approve moving to M2
+
+## M2A: Backend Database Connection Foundation
+
+Status: Complete.
+
+- [x] Add `sqlalchemy`, `asyncpg`, and `pydantic-settings` backend dependencies
+- [x] Add backend settings for `APP_ENV`, `DATABASE_URL`, and `CORS_ALLOWED_ORIGINS`
+- [x] Add async SQLAlchemy engine and session factory
+- [x] Add `get_db_session` dependency
+- [x] Avoid automatic table creation
+- [x] Keep `GET /health` returning `{"status": "ok"}`
+- [x] Add `GET /health/db` database reachability check
+- [x] Fix PostgreSQL 18 local volume mount target
+- [x] Keep default backend tests independent of Docker and live PostgreSQL
+- [x] Document backend test and Docker health-check commands
+- [ ] Approve moving to M2B

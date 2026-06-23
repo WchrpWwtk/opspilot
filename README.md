@@ -7,8 +7,8 @@ The project will grow in small milestones to demonstrate real-world application 
 ## Tech Stack
 
 - Frontend: Next.js, TypeScript, plain CSS for the current shell
-- Backend: FastAPI
-- Database: PostgreSQL local service, application persistence planned
+- Backend: FastAPI, SQLAlchemy async foundation
+- Database: PostgreSQL local service, async connection foundation added, application persistence planned
 - Local development: Docker Compose
 - Testing: pytest for backend tests
 - CI/CD: GitHub Actions planned
@@ -26,11 +26,11 @@ infra/        Deployment and infrastructure configuration, planned
 
 ## Local Development Status
 
-Milestone 1D adds a minimal Docker Compose local development baseline. The backend has a `/health` endpoint and one pytest test. Database application code, authentication, and frontend API integration are still planned.
+Milestone 2A adds the smallest backend database connection foundation. The backend has `/health` and `/health/db` endpoints, async SQLAlchemy session setup, and one pytest test that does not require Docker. Database models, migrations, authentication, and frontend API integration are still planned.
 
 ## Current Milestone
 
-Current milestone: M1D - Docker Compose Local Development Baseline.
+Current milestone: M2A - Backend Database Connection Foundation.
 
 ## Docker Compose Local Development
 
@@ -46,11 +46,26 @@ Start Postgres, the FastAPI backend, and the Next.js frontend:
 docker compose up --build
 ```
 
+If an old PostgreSQL volume was already created with the previous local setup, reset the local Docker volumes before starting again:
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
 In another terminal, verify the backend health check:
 
 ```bash
 curl http://127.0.0.1:8000/health
 ```
+
+Verify the database health check while Docker Compose is running:
+
+```bash
+curl http://127.0.0.1:8000/health/db
+```
+
+The API container uses Docker service DNS `postgres:5432` to reach PostgreSQL. `POSTGRES_HOST_PORT=5433` is only for connecting from the host machine.
 
 Open the frontend:
 
@@ -70,10 +85,8 @@ Start the FastAPI backend:
 
 ```bash
 cd apps/api
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[dev]"
-uvicorn app.main:app --reload
+uv sync
+uv run uvicorn app.main:app --reload
 ```
 
 In another terminal, verify the health check:
@@ -86,7 +99,7 @@ Run backend tests:
 
 ```bash
 cd apps/api
-pytest
+uv run pytest
 ```
 
 ## Frontend Local Development

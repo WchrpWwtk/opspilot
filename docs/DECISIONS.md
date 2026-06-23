@@ -13,3 +13,12 @@
 ## Docker Compose Local Development
 
 - Keep `compose.yml` at the repository root so local development can start with `docker compose up --build` from the project root.
+- Mount the PostgreSQL 18 named data volume at `/var/lib/postgresql`; PostgreSQL 18 Docker images no longer accept the old `/var/lib/postgresql/data` mount target.
+- API containers should connect to PostgreSQL through Docker service DNS at `postgres:5432`.
+- Host PostgreSQL access uses `POSTGRES_HOST_PORT`; the default host port is `5433`.
+
+## Backend Database Access
+
+- Use SQLAlchemy async for database access.
+- Use `asyncpg` as the PostgreSQL driver.
+- Do not create database tables automatically from application startup code.

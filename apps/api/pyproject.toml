@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "FastAPI backend for OpsPilot AI."
 requires-python = ">=3.12"
 dependencies = [
+    "asyncpg",
     "fastapi",
+    "pydantic-settings",
+    "sqlalchemy",
     "uvicorn",
 ]
 
