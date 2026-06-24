@@ -16,6 +16,7 @@
 - Mount the PostgreSQL 18 named data volume at `/var/lib/postgresql`; PostgreSQL 18 Docker images no longer accept the old `/var/lib/postgresql/data` mount target.
 - API containers should connect to PostgreSQL through Docker service DNS at `postgres:5432`.
 - Host PostgreSQL access uses `POSTGRES_HOST_PORT`; the default host port is `5433`.
+- Commands running from the host must connect to PostgreSQL at `127.0.0.1:5433`, not Docker service DNS `postgres:5432`.
 
 ## Backend Database Access
 
@@ -29,3 +30,12 @@
 - Alembic reads `DATABASE_URL` from the backend settings/environment configuration.
 - Keep migrations under `apps/api/alembic`.
 - Do not create database tables automatically from application startup code.
+- Schema changes must go through Alembic migrations.
+- Run Alembic inside the API container when using the container `DATABASE_URL`; host-run Alembic commands must override `DATABASE_URL` to use `127.0.0.1:5433`.
+
+## SQLAlchemy Model Conventions
+
+- Future database tables should use UUID primary keys.
+- Future database tables should include `created_at` and `updated_at` timestamps.
+- Do not create database tables automatically from application startup code.
+- Schema changes must go through Alembic migrations.

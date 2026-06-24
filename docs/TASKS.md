@@ -86,4 +86,18 @@ Status: Complete.
 - [x] Avoid creating real migration revisions or database tables
 - [x] Document backend migration commands in `README.md`
 - [x] Record migration decisions in `docs/DECISIONS.md`
-- [ ] Approve moving to M2C
+- [x] Approve moving to M2C
+
+## M2C: SQLAlchemy Model Conventions
+
+Status: Complete.
+
+- [x] Keep a single SQLAlchemy declarative `Base` for Alembic target metadata
+- [x] Add an abstract UUID primary key convention
+- [x] Add abstract timezone-aware `created_at` and `updated_at` timestamp conventions
+- [x] Use database-side timestamp defaults where appropriate
+- [x] Avoid defining concrete models, table names, database tables, or migration revisions
+- [x] Add tests for base metadata and shared conventions without requiring PostgreSQL or Docker
+- [x] Update `README.md` with current model status
+- [x] Record model and migration decisions in `docs/DECISIONS.md`
+- [ ] Approve moving to M2D

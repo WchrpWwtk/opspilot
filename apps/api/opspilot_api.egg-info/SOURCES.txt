@@ -1,9 +1,15 @@
 pyproject.toml
 app/init.py
 app/main.py
+app/core/config.py
+app/core/init.py
+app/db/base.py
+app/db/init.py
+app/db/session.py
 opspilot_api.egg-info/PKG-INFO
 opspilot_api.egg-info/SOURCES.txt
 opspilot_api.egg-info/dependency_links.txt
 opspilot_api.egg-info/requires.txt
 opspilot_api.egg-info/top_level.txt
+tests/test_db_base.py
 tests/test_health.py
