@@ -100,4 +100,21 @@ Status: Complete.
 - [x] Add tests for base metadata and shared conventions without requiring PostgreSQL or Docker
 - [x] Update `README.md` with current model status
 - [x] Record model and migration decisions in `docs/DECISIONS.md`
-- [ ] Approve moving to M2D
+- [x] Approve moving to M2D
+
+## M2D: Initial User Model and Migration
+
+Status: Complete.
+
+- [x] Add initial `User` SQLAlchemy model
+- [x] Use the existing UUID primary key and timestamp conventions
+- [x] Add required `email`, `full_name`, `role`, and `is_active` fields
+- [x] Use simple role values: `admin`, `manager`, and `staff`
+- [x] Keep login, password hashing, sessions, JWTs, and API routes out of M2D
+- [x] Explicitly import the User model for Alembic metadata discovery
+- [x] Add one Alembic revision that creates and drops the `users` table
+- [x] Uniquely index `users.email`
+- [x] Add model metadata tests that do not require PostgreSQL or Docker
+- [x] Update migration instructions in `README.md`
+- [x] Record M2D decisions in `docs/DECISIONS.md`
+- [ ] Approve moving to M3

@@ -8,7 +8,7 @@ The project will grow in small milestones to demonstrate real-world application 
 
 - Frontend: Next.js, TypeScript, plain CSS for the current shell
 - Backend: FastAPI, SQLAlchemy async foundation, typed model conventions, Alembic migration tooling
-- Database: PostgreSQL local service, async connection foundation added, model conventions defined, application persistence planned
+- Database: PostgreSQL local service, async connection foundation added, initial User model and migration added
 - Local development: Docker Compose
 - Testing: pytest for backend tests
 - CI/CD: GitHub Actions planned
@@ -26,11 +26,11 @@ infra/        Deployment and infrastructure configuration, planned
 
 ## Local Development Status
 
-Milestone 2C adds reusable SQLAlchemy model conventions for the backend. The backend has `/health` and `/health/db` endpoints, async SQLAlchemy session setup, Alembic migration tooling, and a pytest suite that does not require Docker. Real database models, actual schema migrations, authentication, and frontend API integration are still planned.
+Milestone 2D adds the first real database model and migration: the `users` table. The backend has `/health` and `/health/db` endpoints, async SQLAlchemy session setup, Alembic migration tooling, and a pytest suite that does not require Docker. Login, password handling, authorization, and frontend API integration are still planned.
 
 ## Current Milestone
 
-Current milestone: M2C - SQLAlchemy Model Conventions.
+Current milestone: M2D - Initial User Model and Migration.
 
 ## Docker Compose Local Development
 
@@ -104,14 +104,26 @@ uv run pytest
 
 ## Backend Database Migrations
 
-Alembic is configured under `apps/api/alembic` and reads `DATABASE_URL` from the backend settings/environment. There are no actual schema migration revisions yet.
+Alembic is configured under `apps/api/alembic` and reads `DATABASE_URL` from the backend settings/environment. The first real migration creates the `users` table.
 
-Current model status: SQLAlchemy model conventions exist for UUID primary keys plus `created_at` and `updated_at` timestamps. No real models or database tables exist yet, and no schema migration revisions exist yet.
+Current model status: the `User` model uses the shared UUID primary key and `created_at` / `updated_at` timestamp conventions. The `users.email` field is required and uniquely indexed.
 
-When Docker Compose is running, Alembic can be checked from inside the API container. This uses the container environment where PostgreSQL is reachable at `postgres:5432`:
+When Docker Compose is running, apply migrations from inside the API container. This uses the container environment where PostgreSQL is reachable at `postgres:5432`:
+
+```bash
+docker compose exec api uv run alembic upgrade head
+```
+
+Check the current migration revision:
 
 ```bash
 docker compose exec api uv run alembic current
+```
+
+Local/dev only: downgrade one migration step when resetting or testing local migration behavior. Do not use this against shared or production data without a reviewed rollback plan.
+
+```bash
+docker compose exec api uv run alembic downgrade -1
 ```
 
 Alembic can also be checked from the host, but host commands must override `DATABASE_URL` to use the published PostgreSQL port at `127.0.0.1:5433`:
@@ -121,7 +133,7 @@ cd apps/api
 DATABASE_URL=postgresql+asyncpg://opspilot:change_me_for_local_dev@127.0.0.1:5433/opspilot uv run alembic current
 ```
 
-Create a future migration after models are added:
+Create a future migration after future model or schema changes:
 
 ```bash
 cd apps/api

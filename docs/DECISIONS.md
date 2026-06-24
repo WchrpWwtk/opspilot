@@ -39,3 +39,12 @@
 - Future database tables should include `created_at` and `updated_at` timestamps.
 - Do not create database tables automatically from application startup code.
 - Schema changes must go through Alembic migrations.
+
+## Initial User Table
+
+- The first real database table is `users`.
+- The `users` table uses a UUID primary key.
+- User email addresses are required and uniquely indexed.
+- User roles use simple string values in M2D: `admin`, `manager`, and `staff`.
+- Role authorization will be implemented in M3, not M2D.
+- Migrations, not application startup, own schema creation.
