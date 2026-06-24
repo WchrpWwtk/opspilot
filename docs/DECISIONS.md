@@ -22,3 +22,10 @@
 - Use SQLAlchemy async for database access.
 - Use `asyncpg` as the PostgreSQL driver.
 - Do not create database tables automatically from application startup code.
+
+## Backend Database Migrations
+
+- Use Alembic for database migrations.
+- Alembic reads `DATABASE_URL` from the backend settings/environment configuration.
+- Keep migrations under `apps/api/alembic`.
+- Do not create database tables automatically from application startup code.

@@ -71,4 +71,19 @@ Status: Complete.
 - [x] Fix PostgreSQL 18 local volume mount target
 - [x] Keep default backend tests independent of Docker and live PostgreSQL
 - [x] Document backend test and Docker health-check commands
-- [ ] Approve moving to M2B
+- [x] Approve moving to M2B
+
+## M2B: Alembic Migration Baseline
+
+Status: Complete.
+
+- [x] Add `alembic` as the only new backend production dependency
+- [x] Add SQLAlchemy declarative base without defining models
+- [x] Add backend Alembic configuration under `apps/api`
+- [x] Load Alembic database URL from backend settings/environment
+- [x] Configure Alembic for async SQLAlchemy PostgreSQL URLs
+- [x] Track an empty `alembic/versions` directory with `.gitkeep`
+- [x] Avoid creating real migration revisions or database tables
+- [x] Document backend migration commands in `README.md`
+- [x] Record migration decisions in `docs/DECISIONS.md`
+- [ ] Approve moving to M2C

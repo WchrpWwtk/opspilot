@@ -7,8 +7,8 @@ The project will grow in small milestones to demonstrate real-world application 
 ## Tech Stack
 
 - Frontend: Next.js, TypeScript, plain CSS for the current shell
-- Backend: FastAPI, SQLAlchemy async foundation
-- Database: PostgreSQL local service, async connection foundation added, application persistence planned
+- Backend: FastAPI, SQLAlchemy async foundation, Alembic migration tooling
+- Database: PostgreSQL local service, async connection foundation added, migrations configured, application persistence planned
 - Local development: Docker Compose
 - Testing: pytest for backend tests
 - CI/CD: GitHub Actions planned
@@ -26,11 +26,11 @@ infra/        Deployment and infrastructure configuration, planned
 
 ## Local Development Status
 
-Milestone 2A adds the smallest backend database connection foundation. The backend has `/health` and `/health/db` endpoints, async SQLAlchemy session setup, and one pytest test that does not require Docker. Database models, migrations, authentication, and frontend API integration are still planned.
+Milestone 2B adds Alembic migration tooling for the backend. The backend has `/health` and `/health/db` endpoints, async SQLAlchemy session setup, and one pytest test suite that does not require Docker. Database models, actual schema migrations, authentication, and frontend API integration are still planned.
 
 ## Current Milestone
 
-Current milestone: M2A - Backend Database Connection Foundation.
+Current milestone: M2B - Alembic Migration Baseline.
 
 ## Docker Compose Local Development
 
@@ -100,6 +100,31 @@ Run backend tests:
 ```bash
 cd apps/api
 uv run pytest
+```
+
+## Backend Database Migrations
+
+Alembic is configured under `apps/api/alembic` and reads `DATABASE_URL` from the backend settings/environment. There are no actual schema migration revisions yet.
+
+Check the current migration state while PostgreSQL is running:
+
+```bash
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://opspilot:change_me_for_local_dev@127.0.0.1:5433/opspilot uv run alembic current
+```
+
+Create a future migration after models are added:
+
+```bash
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://opspilot:change_me_for_local_dev@127.0.0.1:5433/opspilot uv run alembic revision --autogenerate -m "describe change"
+```
+
+Apply migrations:
+
+```bash
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://opspilot:change_me_for_local_dev@127.0.0.1:5433/opspilot uv run alembic upgrade head
 ```
 
 ## Frontend Local Development
